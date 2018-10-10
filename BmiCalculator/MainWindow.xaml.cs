@@ -78,7 +78,7 @@ namespace BmiCalculator
             int value;
             if (int.TryParse(_alter.Text,out value))
             {
-                if ((value > 0) && (value < 300))
+                if ((value > 0) && (value < 150))
                     Alter = value;
             }
             
