@@ -98,5 +98,7 @@ namespace BmiCalculator
             _genderMale.Style = FindResource("gender_selection_done") as Style;
             Calculate();
         }
+
+        //Hallo
     }
 }
