@@ -59,7 +59,6 @@ namespace BmiCalculator
                 {
                     _gewicht.Style = FindResource("input_invalid") as Style;
                     gewicht_ok = false;
-                    
                     _gewicht.ToolTip = "Gewicht: 0 bis 200 kg möglich.";
                 }
             }
@@ -81,6 +80,7 @@ namespace BmiCalculator
                 {
                     groesse_ok = false;
                     _groesse.Style = FindResource("input_invalid") as Style;
+                    _groesse.ToolTip = "Groesse von 0 bis 300 cm möglich.";
                 }
             }
 
@@ -101,6 +101,7 @@ namespace BmiCalculator
                 {
                     alter_ok = false;
                     _alter.Style = FindResource("input_invalid") as Style;
+                    _alter.ToolTip = "Alter von 0 bis 130 Jahren möglich.";
                 }
             }
 
