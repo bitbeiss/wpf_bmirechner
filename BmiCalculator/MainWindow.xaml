@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:BmiCalculator"
         mc:Ignorable="d"
         Title="BMI Rechner" Height="350" Width="525">
@@ -31,12 +32,22 @@
             <Setter Property="FontSize" Value="16" />
             <Setter Property="BorderBrush" Value="Red" />
             <Setter Property="Foreground" Value="Red" />
+            <Style.Triggers>
+                <Trigger Property="ToolTip" Value="{x:Static sys:String.Empty}">
+                    <Setter Property="ToolTipService.IsEnabled" Value="False" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="input_valid" TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="BorderBrush" Value="Blue" />
             <Setter Property="Foreground" Value="Blue" />
+            <Style.Triggers>
+                <Trigger Property="ToolTip" Value="{x:Static sys:String.Empty}">
+                    <Setter Property="ToolTipService.IsEnabled" Value="False" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
 
@@ -75,7 +86,8 @@
             <TextBox Grid.Row="3" TextChanged="OnTextChangedAlter" x:Name="_alter" />
 
             <TextBlock Grid.Row="4" Text="Gewicht" />
-            <TextBox Grid.Row="5" TextChanged="OnTextChangedGewicht" x:Name="_gewicht" />
+            <TextBox Grid.Row="5" TextChanged="OnTextChangedGewicht" x:Name="_gewicht" >
+            </TextBox>
 
             <TextBlock Grid.Row="6" Text="Größe" />
             <TextBox Grid.Row="7" TextChanged="OnTextChangedGroesse" x:Name="_groesse" />

@@ -53,12 +53,14 @@ namespace BmiCalculator
                     Gewicht = value;
                     gewicht_ok = true;
                     _gewicht.Style = FindResource("input_valid") as Style;
-                }
+                    _gewicht.ToolTip = "";           }
 
                 else
                 {
                     _gewicht.Style = FindResource("input_invalid") as Style;
                     gewicht_ok = false;
+                    
+                    _gewicht.ToolTip = "Gewicht: 0 bis 200 kg möglich.";
                 }
             }
 
