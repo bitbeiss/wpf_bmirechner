@@ -25,9 +25,10 @@ namespace BmiCalculator
     public partial class MainWindow : Window
     {
 
-        bool gewicht_ok;
-        bool alter_ok;
-        bool groesse_ok;
+        bool gewicht_ok=false;
+        bool alter_ok=false;
+        bool groesse_ok=false;
+        bool gender_ok=false;
 
         int Gewicht;
         int Groesse;
@@ -45,8 +46,7 @@ namespace BmiCalculator
 
         private void OnTextChangedGewicht(object sender, TextChangedEventArgs e)
         {
-            int value;
-            if (int.TryParse(_gewicht.Text, out value))
+            if (int.TryParse(_gewicht.Text, out int value))
             {
                 if ((value > 0) && (value < 200))
                 {
@@ -54,11 +54,12 @@ namespace BmiCalculator
                     gewicht_ok = true;
                     _gewicht.Style = FindResource("input_valid") as Style;
                 }
-            }
-            else
-            {
-                _gewicht.Style = FindResource("input_invalid") as Style;
-                gewicht_ok = false;
+
+                else
+                {
+                    _gewicht.Style = FindResource("input_invalid") as Style;
+                    gewicht_ok = false;
+                }
             }
 
             Calculate();
@@ -66,8 +67,7 @@ namespace BmiCalculator
 
         private void OnTextChangedGroesse(object sender, TextChangedEventArgs e)
         {
-            int value;
-            if (int.TryParse(_groesse.Text,out value))
+            if (int.TryParse(_groesse.Text,out int value))
             {
                 if ((value > 0) && (value < 300))
                 {
@@ -87,14 +87,13 @@ namespace BmiCalculator
 
         private void OnTextChangedAlter(object sender, TextChangedEventArgs e)
         {
-            int value;
-            if (int.TryParse(_alter.Text,out value))
+            if (int.TryParse(_alter.Text, out int value))
             {
                 if ((value > 0) && (value < 130))
                 {
                     Alter = value;
                     alter_ok = true;
-                    _alter.Style = FindResource("input_invalid") as Style;
+                    _alter.Style = FindResource("input_valid") as Style;
                 }
                 else
                 {
@@ -118,9 +117,8 @@ namespace BmiCalculator
         {
             _genderFemale.Style = FindResource("gender_selection_done") as Style;
             _genderMale.Style = FindResource("gender_selection_done") as Style;
+            gender_ok = true;
             Calculate();
         }
-
-        //Hallo
     }
 }

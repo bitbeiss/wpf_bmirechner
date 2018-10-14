@@ -78,8 +78,7 @@
             <TextBox Grid.Row="5" TextChanged="OnTextChangedGewicht" x:Name="_gewicht" />
 
             <TextBlock Grid.Row="6" Text="Größe" />
-            <TextBox Grid.Row="7" TextChanged="OnTextChangedGroesse" x:Name="_groesse">
-            </TextBox>
+            <TextBox Grid.Row="7" TextChanged="OnTextChangedGroesse" x:Name="_groesse" />
 
         </Grid>
 
