@@ -27,18 +27,19 @@
         </Style>
 
         
-        <Style TargetType="{x:Type TextBox}">
+        <Style x:Key="input_invalid" TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="16" />
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="BorderBrush" Value="Red" />
-                    <Setter Property="Foreground" Value="Red" />
-                </Trigger>
-                
-            </Style.Triggers>
+            <Setter Property="BorderBrush" Value="Red" />
+            <Setter Property="Foreground" Value="Red" />
         </Style>
-        
-        
+
+        <Style x:Key="input_valid" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="BorderBrush" Value="Blue" />
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
+
+
     </Window.Resources>
     
     <Grid>
@@ -78,9 +79,6 @@
 
             <TextBlock Grid.Row="6" Text="Größe" />
             <TextBox Grid.Row="7" TextChanged="OnTextChangedGroesse" x:Name="_groesse">
-                <TextBox.Text>
-                    <Binding x:Name="gr_binding" Path="groesse" ValidatesOnExceptions="True" UpdateSourceTrigger="PropertyChanged" />
-                </TextBox.Text>
             </TextBox>
 
         </Grid>

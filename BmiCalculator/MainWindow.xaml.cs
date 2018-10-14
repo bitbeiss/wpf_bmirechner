@@ -48,15 +48,18 @@ namespace BmiCalculator
             int value;
             if (int.TryParse(_gewicht.Text, out value))
             {
-                if ((value > 0) && (value < 300))
+                if ((value > 0) && (value < 200))
                 {
                     Gewicht = value;
                     gewicht_ok = true;
+                    _gewicht.Style = FindResource("input_valid") as Style;
                 }
             }
             else
-                _gewicht.BorderBrush = System.Windows.Media.Brushes.Red;
+            {
+                _gewicht.Style = FindResource("input_invalid") as Style;
                 gewicht_ok = false;
+            }
 
             Calculate();
         }
@@ -67,9 +70,18 @@ namespace BmiCalculator
             if (int.TryParse(_groesse.Text,out value))
             {
                 if ((value > 0) && (value < 300))
+                {
                     Groesse = value;
+                    groesse_ok = true;
+                    _groesse.Style = FindResource("input_valid") as Style;
+                }
+                else
+                {
+                    groesse_ok = false;
+                    _groesse.Style = FindResource("input_invalid") as Style;
+                }
             }
-            
+
             Calculate();
         }
 
@@ -78,18 +90,28 @@ namespace BmiCalculator
             int value;
             if (int.TryParse(_alter.Text,out value))
             {
-                if ((value > 0) && (value < 150))
+                if ((value > 0) && (value < 130))
+                {
                     Alter = value;
+                    alter_ok = true;
+                    _alter.Style = FindResource("input_invalid") as Style;
+                }
+                else
+                {
+                    alter_ok = false;
+                    _alter.Style = FindResource("input_invalid") as Style;
+                }
             }
-            
+
             Calculate();
         }
 
         private void Calculate()
         {
-            var alter = _alter.Text;
-
-            _result.Value = _result.Value + 10;
+            if (gewicht_ok == true && groesse_ok == true && alter_ok == true)
+            {
+                _result.Value = _result.Value + 10;
+            }
         }
 
         private void CheckedChanged(object sender, RoutedEventArgs e)
