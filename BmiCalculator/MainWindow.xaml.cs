@@ -31,7 +31,7 @@ namespace BmiCalculator
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            BMIRechner.Calculate();
+            reset();
         }
 
         private void CheckedChanged(object sender, RoutedEventArgs e)
@@ -40,10 +40,32 @@ namespace BmiCalculator
             _genderMale.Style = FindResource("gender_selection_done") as Style;
             BMIRechner.Female = Convert.ToBoolean(_genderFemale.IsChecked);
             BMIRechner.Male = Convert.ToBoolean(_genderMale.IsChecked);
-
-
-            BMIRechner.Calculate();
+            reset();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(BMIRechner.Male || BMIRechner.Female))
+                return;
+
+            BMIRechner.Calculate();
+
+            if(BMIRechner.IsValid())
+            {
+                BMI_value.Text = BMIRechner.Result.ToString();
+                _slider.Value = BMIRechner.Result;
+            }
+            else
+            {
+                reset();
+            }
+        }
+
+        public void reset()
+        {
+            BMI_value.Text = " ";
+            _slider.Value = 0;
+            BMIRechner.ClassificationResult = "";
+        }
     }
 }

@@ -32,7 +32,7 @@
                                Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">   
                             x
                             </TextBlock>
-                            <Border BorderBrush="red" BorderThickness="2">
+                            <Border BorderBrush="red" BorderThickness="1">
                                 <AdornedElementPlaceholder Name="adorner" />
                             </Border>
                         </DockPanel>
@@ -58,6 +58,48 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <ControlTemplate x:Key="ellipseButton" TargetType="Button">
+            <Grid>
+                <Ellipse Name="ellipse"
+                     Width="{TemplateBinding Width}"
+                     Height="{TemplateBinding Height}"
+                     Stroke="Black"
+                     StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="0" Color="white" />
+                            <GradientStop Offset="1" Color="LightGreen" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <ContentPresenter HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      Content="{TemplateBinding Content}" >
+                </ContentPresenter>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter TargetName="ellipse" 
+              Property="StrokeThickness" Value="3" />
+                    <Setter TargetName="ellipse" 
+              Property="Stroke" Value="Red" />
+                </Trigger>
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Setter TargetName="ellipse" Property="StrokeThickness" Value="2" />
+                    <Setter TargetName="ellipse" Property="Stroke" Value="Red" />
+                    <Setter TargetName="ellipse" Property="Fill">
+                        <Setter.Value>
+                            <RadialGradientBrush>
+                                <GradientStop Offset="0" Color="Blue" />
+                                <GradientStop Offset="1" Color="WhiteSmoke" />
+                            </RadialGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
     </Window.Resources>
 
     <Grid>
@@ -73,6 +115,8 @@
         <!-- Eingabebereich -->
         <Grid Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -114,9 +158,10 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
+            <Button Grid.Row="9" Grid.Column="0" Template="{StaticResource ellipseButton}" Content="BMI berechnen" Click="Button_Click" Margin="0,36.8,-0.2,-62" />
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.Column="1" Margin="0.2,0,0.4,18.8" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -124,13 +169,12 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Path=Result}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="147,0,128.6,0" />
-            <Slider Background="{StaticResource SliderColor}" Grid.Row="3" Maximum="45" Minimum="10" Value="{Binding Path=Result}" IsEnabled="False" x:Name="_result" Cursor="None" />
+            <TextBlock x:Name="BMI_value"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="147,0,128.6,0" Width="50" />
+            <Slider x:Name="_slider" Background="{StaticResource SliderColor}" Grid.Row="3" Maximum="45" Minimum="10" Value="0" IsEnabled="False"  Cursor="None" />
             <TextBlock HorizontalAlignment="Left" Margin="84,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Ihr BMI:" VerticalAlignment="Center" FontSize="15" Height="20" Width="58"/>
-            <TextBlock Text="{Binding Path=ClassificationResult}"  Margin="0,25,-0.4,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="top" HorizontalAlignment="Center" Width="300"/>
-        </Grid>
+            <TextBlock Text="{Binding Path=ClassificationResult}"  Margin="0,25,-0.4,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="top" HorizontalAlignment="Center" Width="100"/>
 
-        <Button Grid.Row="1" Grid.Column="1" Content="Zurücksetzen" HorizontalAlignment="Right" />
+        </Grid>
 
     </Grid>
 </Window>

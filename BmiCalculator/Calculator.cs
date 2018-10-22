@@ -10,12 +10,20 @@ namespace BmiCalculator
     public class Calculator : INotifyPropertyChanged, IDataErrorInfo
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private bool _Eingabefehler;
-        public bool Eingabefehler { get => _Eingabefehler; set => _Eingabefehler = value; }
         private bool _Male;
         public bool Male { get => _Male; set => _Male = value; }
         private bool _Female;
         public bool Female { get => _Female; set => _Female = value; }
+
+        private bool _Valid;
+        public bool Valid { get => _Valid; set => _Valid = value; }
+
+        public int iAlter;
+        double dGroesse;
+        double dGewicht;
+
+
+
 
         private string _ClassificationResult;
         public string ClassificationResult
@@ -57,22 +65,14 @@ namespace BmiCalculator
                     ClassificationResult = "massive Adipositas";
             }
             else
-                ClassificationResult = "Klassifikation";
+                ClassificationResult = "";
         }
         public void Calculate()
         {
-            if (Eingabefehler)
-            {
-                Result = 0;
-                return;
-            }
-            double dGrosse = Convert.ToDouble(Groesse) / 100.0;
-            double dGewicht = Convert.ToDouble(Gewicht);
+                double dGroesse_in_m = dGroesse / 100.0;
 
-            Result = Math.Round(dGewicht / Math.Pow(dGrosse, 2.0), 1);
-            Classification();
-
-
+                Result = Math.Round(dGewicht / Math.Pow(dGroesse_in_m, 2.0), 1);
+                Classification();
         }
         public virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
@@ -90,8 +90,8 @@ namespace BmiCalculator
                 OnPropertyChanged(new PropertyChangedEventArgs("Result"));
             }
         }
-        private int _Groesse;
-        public int Groesse
+        private string _Groesse;
+        public string Groesse
         {
             get { return _Groesse; }
             set
@@ -101,8 +101,8 @@ namespace BmiCalculator
             }
         }
 
-        private int _Alter;
-        public int Alter
+        private string _Alter;
+        public string Alter
         {
             get { return _Alter; }
             set
@@ -112,8 +112,8 @@ namespace BmiCalculator
             }
         }
 
-        private int _Gewicht;
-        public int Gewicht
+        private string _Gewicht;
+        public string Gewicht
         {
             get { return _Gewicht; }
             set
@@ -134,22 +134,48 @@ namespace BmiCalculator
             {
                 if (propertyName == "Alter")
                 {
-                    if ((_Alter < 1) || (_Alter > 120))
+                    if (!int.TryParse(Alter, out iAlter))
+                    {
                         return "Das Alter muss zwischen 1 und 120 Jahren liegen.";
+                    }
+                    if ((iAlter < 1) || (iAlter > 120))
+                        return "Das Alter muss zwischen 1 und 120 Jahren liegen."; ;
                 }
                 if (propertyName == "Gewicht")
                 {
-                    if ((_Gewicht < 1) || (_Gewicht > 300))
+                    if (!double.TryParse(Gewicht, out dGewicht))
+                    {
+                        return "Das Gewicht muss zwischen 1 und 300 Kilogramm liegen.";
+                    }
+
+                    if ((dGewicht < 1) || (dGewicht > 300))
                         return "Das Gewicht muss zwischen 1 und 300 Kilogramm liegen.";
                 }
 
                 if (propertyName == "Groesse")
                 {
-                    if ((_Groesse < 1) || (_Groesse > 350))
-                        return "Die Größe muss zwischen 1 und 350 cm sein.";
+                    if (!double.TryParse(Groesse, out dGroesse))
+                    {
+                        return "Die Größe muss zwischen 1 und 350 cm liegen.";
+                    }
+
+                    if ((dGroesse < 1) || (dGroesse > 350))
+                        return "Die Größe muss zwischen 1 und 350 cm liegen.";
                 }
                 return null;
             }
         }
+        public bool IsValid()
+        {
+            if (string.IsNullOrEmpty(this["Alter"]) &&
+                string.IsNullOrEmpty(this["Gewicht"]) &&
+                string.IsNullOrEmpty(this["Groesse"]))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
