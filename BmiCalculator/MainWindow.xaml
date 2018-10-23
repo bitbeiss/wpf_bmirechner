@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BmiCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="590"
-        MinHeight="350" MinWidth="590">
+        Title="MainWindow" Height="480" Width="640"
+        MinHeight="480" MinWidth="640">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="DeepSkyBlue" Offset="0"/>
@@ -23,7 +23,7 @@
             <GradientStop Color="yellow" Offset="0.5" />
             <GradientStop Color="red" Offset="1.0" />
         </LinearGradientBrush>
-        <Style TargetType="TextBox" >
+        <Style TargetType="TextBox">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -160,7 +160,7 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox>
-            <Button Grid.Row="9" Grid.Column="0" Template="{StaticResource ellipseButton}" Content="BMI berechnen" Click="Button_Click" Margin="0,20,-0.2,-62" FontSize="16" MinWidth="150" MaxWidth="150" HorizontalAlignment="Left" Height="46" MinHeight="50" />
+            <Button Grid.Row="9" Grid.Column="0" Template="{StaticResource ellipseButton}" Content="BMI berechnen" Click="Button_Click" Margin="0,40,-0.2,-62" FontSize="16" MinWidth="150" MaxWidth="150" HorizontalAlignment="Left" Height="46" MinHeight="50" />
         </Grid>
 
         <Grid Grid.Row="0" Grid.Column="1" Margin="20,0,0.4,50" Grid.RowSpan="2">
