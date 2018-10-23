@@ -31,7 +31,7 @@ namespace BmiCalculator
             get { return _ClassificationResult; }
             set
             {
-                _ClassificationResult = value;
+                _ClassificationResult = ("Diagnose Status: " + value);
                 OnPropertyChanged(new PropertyChangedEventArgs("ClassificationResult"));
             }
         }
