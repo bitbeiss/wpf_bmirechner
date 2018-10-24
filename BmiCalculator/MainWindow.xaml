@@ -23,7 +23,9 @@
             <GradientStop Color="yellow" Offset="0.5" />
             <GradientStop Color="red" Offset="1.0" />
         </LinearGradientBrush>
+        
         <Style TargetType="TextBox">
+            <Setter Property="Background" Value="LightGreen" />
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
@@ -41,6 +43,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Background" Value="LightCoral"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="gender_selection_done" TargetType="{x:Type RadioButton}" >
