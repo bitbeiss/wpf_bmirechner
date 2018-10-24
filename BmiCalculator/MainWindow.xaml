@@ -88,12 +88,32 @@
                 </ContentPresenter>
             </Grid>
             <ControlTemplate.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="True">
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Button.IsMouseOver" Value="True" />
+                        <Condition Property="Validation.HasError" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
                     <Setter TargetName="ellipse" 
-              Property="StrokeThickness" Value="3" />
+                        Property="StrokeThickness" Value="6" />
                     <Setter TargetName="ellipse" 
-              Property="Stroke" Value="Red" />
-                </Trigger>
+                        Property="Stroke" Value="Red" />
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Button.IsMouseOver" Value="True" />
+                        <Condition Property="Validation.HasError" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter TargetName="ellipse" 
+                        Property="StrokeThickness" Value="6" />
+                        <Setter TargetName="ellipse" 
+                        Property="Stroke" Value="LimeGreen" />
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+
                 <Trigger Property="Button.IsPressed" Value="True">
                     <Setter TargetName="ellipse" Property="StrokeThickness" Value="2" />
                     <Setter TargetName="ellipse" Property="Stroke" Value="Red" />
