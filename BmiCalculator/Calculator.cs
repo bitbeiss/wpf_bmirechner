@@ -143,7 +143,7 @@ namespace BmiCalculator
                 {
                     if (!int.TryParse(Alter, out iAlter))
                     {
-                        return "Das Alter muss zwischen 1 und 120 Jahren liegen.";
+                        return "Das Alter muss zwischen 1 und 120 Jahren liegen. Es dürfen nur Ziffern und KEIN Komma enthalten sein.";
                     }
                     if ((iAlter < 1) || (iAlter > 120))
                         return "Das Alter muss zwischen 1 und 120 Jahren liegen."; ;
@@ -152,18 +152,18 @@ namespace BmiCalculator
                 {
                     if (!double.TryParse(Gewicht, out dGewicht))
                     {
-                        return "Das Gewicht muss zwischen 1 und 300 Kilogramm liegen.";
+                        return "Das Gewicht muss zwischen 1 und 300 Kilogramm liegen. Es dürfen nur Ziffern und KEIN Komma enthalten sein.";
                     }
 
                     if ((dGewicht < 1) || (dGewicht > 300))
-                        return "Das Gewicht muss zwischen 1 und 300 Kilogramm liegen.";
+                        return "Das Gewicht muss zwischen 1 und 300 Kilogramm liegen. Es dürfen nur Ziffern und KEIN Komma enthalten sein.";
                 }
 
                 if (propertyName == "Groesse")
                 {
                     if (!double.TryParse(Groesse, out dGroesse))
                     {
-                        return "Die Größe muss zwischen 1 und 350 cm liegen.";
+                        return "Die Größe muss zwischen 1 und 350 cm liegen. Es dürfen nur Ziffern und KEIN Komma enthalten sein.";
                     }
 
                     if ((dGroesse < 1) || (dGroesse > 350))

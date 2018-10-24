@@ -34,7 +34,7 @@
                                FontSize="14" FontWeight="Bold" 
                                ToolTip="{Binding ElementName=adorner,                                            
                                Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">   
-                            x
+                            x  HILFE?
                             </TextBlock>
                             <Border BorderBrush="red" BorderThickness="1">
                                 <AdornedElementPlaceholder Name="adorner" />
@@ -45,7 +45,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="Background" Value="LightCoral"/>
+                    <Setter Property="Background" Value="Goldenrod"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -67,6 +67,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <ControlTemplate x:Key="ellipseButton" TargetType="Button">
             <Grid>
                 <Ellipse Name="ellipse"
